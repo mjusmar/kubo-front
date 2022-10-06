@@ -1,1 +1,20 @@
-<p>dialog-shopping-cart works!</p>
+<div fxLayout="column" class="cls-contain-dialog-cart">
+    <h2> Carrito de compras</h2>
+    <div class="cls-list-container"> 
+        <ul>
+            <div  *ngFor="let product of inputTest">
+                <li>
+                    <div class="cls-list" fxLayout="row">
+
+                        <div class="list-item" >
+
+                            <img class="cls-icon-image"
+                                [src]="product.image">
+                            {{product.name}}
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+</div>
