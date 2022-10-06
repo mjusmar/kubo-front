@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from 'src/app/global.service';
 
 @Component({
   selector: 'app-dialog-shopping-cart',
@@ -7,34 +8,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogShoppingCartComponent implements OnInit {
 
-  inputTest = [
-    {
-      category: 'technology',
-      image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img1.webp",
-      name : 'iPhone X',
-      price : '$366',
-      description : 'Excelente celular'
-    },
-    {
-      category: 'technology',
-      image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img2.webp",
-      name : 'iPhone X',
-      price : '$366',
-      description : 'Excelente celular'
-    },
-    {
-      category: 'technology',
-      image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img3.webp",
-      name : 'iPhone X',
-      price : '$366',
-      description : 'Excelente celular'
-    },
-  ];
+  cartProducts: any = [];
 
-  constructor() { }
+  totalPrice: number = 0;
+
+  constructor(
+    private globalService: GlobalService
+  ) { }
 
   ngOnInit(): void {
-    this.inputTest = JSON.parse(localStorage.getItem('addedProducts') as string)
+    this.totalPrice = 0;
+    this.cartProducts = this.globalService.globalProducts;
+    if(this.cartProducts.lenght !==0){
+      
+      this.cartProducts.forEach((element: any) => {
+        element.price = parseInt(element.price)
+        this.totalPrice += element.price * element.qty;
+      });
+
+    }
+  }
+
+  close(){
+        
+  }
+
+  changeQty(event: number, product: any){
+    this.totalPrice=0;
+    console.log(event);
+    console.log(product);
+    console.log(this.cartProducts);
+
+    product.qty = event;
+    this.cartProducts.forEach((element: any) => {
+      this.totalPrice += element.price * element.qty;
+    });
+
+    this.globalService.globalProducts = this.cartProducts;
+  }
+
+  sumPrice(){
+    
   }
 
 }

@@ -1,0 +1,20 @@
+
+    <div class="input-group mb-3" style="height: 15px; gap: 5px;">
+        <div class="input-group-prepend">
+          <button class="btn-outline-secondary" type="button" id="button-addon1" style="border-radius: 50%;" (click)="changeValueQty(-1)">
+            -
+        </button>
+        </div>
+        <input type="number" class="" placeholder="" style="width: 40px; height: 30px;" 
+                [ngClass]="{'is-invalid': currentQty > 10 || currentQty < 0}"
+                min="0"
+                max="10"
+                (ngModelChange)="OnChangeInput($event)"
+                [(ngModel)]="currentQty">
+
+        <div class="input-group-append">
+            <button class="btn-outline-secondary" type="button"  style="border-radius: 50%;" (click)="changeValueQty(1)">
+                +
+            </button>
+        </div>
+    </div>

@@ -1,13 +1,31 @@
-<div class="cls-container"  style="display:flex; position:absolute; height: 100%; width:100%; ">
-
-    <ul class="flex-container">
-            <div style="width: 20%;" *ngFor="let product of inputTest"> 
-                <app-product-card
-                    [productInfo]="product"
-                    (addProductEvent)="addProduct($event)">
-                </app-product-card>
-            </div>
-    </ul>
+<div>
+    <div class="cls-searchbar" style="flex-flow:row">
+        <div class="form-group has-search" style="width: 80%; position: relative">
+            <mat-icon class="icon-center"> search </mat-icon>
+            <span class="fa fa-search form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchProduct">
+        </div>
+        <select  #selectPicker class="form-select" aria-label="Default select example" style="width:20%;" [(ngModel)]="inputValue" (change)="filterCategory()">
+            <span> hla </span>
+            <option value="filter" selected>Filtrar</option>
+            <option value="technology">Tecnología</option>
+            <option value="food"> Alimentos </option>
+            <option value="home"> Hogar </option>
+        </select>
+    </div>
+    
+    <div class="cls-container"  style="display:flex; height: 100%; width:100%; ">
+        <div style="align-items: center;">
+            <ul class="flex-container">
+                <div style="width: 300px;" *ngFor="let product of productsArrayFiltered | filter: searchProduct"> 
+                        <app-product-card
+                        [productInfo]="product"
+                        (addProductEvent)="addProduct($event)">
+                    </app-product-card>
+                </div>
+            </ul>
+        </div>
+    </div>
 </div>
 
 

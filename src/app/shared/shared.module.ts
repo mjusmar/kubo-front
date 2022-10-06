@@ -5,13 +5,16 @@ import {MatIconModule} from '@angular/material/icon'
 import {MatDialogModule, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { ComponentsModule } from '../components/components.module';
 import { DialogShoppingCartComponent } from '../components/dialog-shopping-cart/dialog-shopping-cart.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   exports:[
     HeaderComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

@@ -1,20 +1,41 @@
 <div fxLayout="column" class="cls-contain-dialog-cart">
-    <h2> Carrito de compras</h2>
-    <div class="cls-list-container"> 
-        <ul>
-            <div  *ngFor="let product of inputTest">
-                <li>
-                    <div class="cls-list" fxLayout="row">
+    <mat-icon class="button-close" (click)="close()"> close </mat-icon>
+    <div fxLayout="column" class="cls-container">
+        
+        <h2> Carrito de compras</h2>
 
-                        <div class="list-item" >
+        <div class="cls-list-container"> 
+            <ul>
+                <div  *ngFor="let product of cartProducts">
+                    <li>
+                        <div class="cls-list" fxLayout="row">
 
-                            <img class="cls-icon-image"
-                                [src]="product.image">
-                            {{product.name}}
+                            <div class="list-item" >
+                                <div >
+                                <img class="cls-icon-image"
+                                    [src]="product.image">
+                                <span>{{product.name}}</span>
+                                </div>
+                                <span style="color: blue;">${{product.price}}</span>
+                                <div style="width:30%; height: 10%; opacity: 60%;">
+                                    <app-incrementer
+                                    [currentQty]="product.qty"
+                                    (incrementEvent)="changeQty($event, product)"></app-incrementer>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </div>
-        </ul>
+                    </li>
+                </div>
+            </ul>
+        </div>
+
+        <div *ngIf="cartProducts.length !== 0" style="margin-top: 1rem;">
+            Precio total: ${{totalPrice}}
+        </div>
+        <div class="cls-save" >
+            <button class="btn btn-primary cls-button">
+                Comprar
+            </button>
+        </div>
     </div>
 </div>

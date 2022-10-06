@@ -1,8 +1,28 @@
 .cls-contain-dialog-cart{
+    display: flex;
     width: 100%;
     height: 100%;
     position: relative;
 
+    .cls-container{
+        width: 100%;
+    }
+
+    .button-close {
+        cursor: pointer;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    h2{
+        text-align: center !important;
+    }
+    .cls-list-container{
+        width: 100%;
+        height: 70%;
+        overflow-y: auto;
+    }
     .cls-list{
         width: 100%;
         padding-bottom: 5px;
@@ -11,6 +31,8 @@
     
         .list-item{
             display: flex;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
             gap: 1rem;
     
@@ -19,6 +41,7 @@
                 width: 25px;
                 border: solid 1px #ceafff;
                 border-radius: 5px;
+                margin-right: 10px;
             }
         }
     
@@ -40,7 +63,16 @@ ul{
     }
 }
 
-h2{
-    text-align: center;
+
+.cls-button{
+    border: none;
 }
 
+.cls-save{
+    width: 100%;
+    align-items: center;
+    flex-flow: row;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
