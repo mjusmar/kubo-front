@@ -1,0 +1,14 @@
+.flex-container {
+    display: flex;
+    width: 100%;
+
+    flex-flow: row wrap;    
+    justify-content: flex-start;
+    
+    padding: 0;
+    margin: 2rem;
+    list-style: none;
+    gap: 4rem;
+    overflow: auto;
+    
+  }
