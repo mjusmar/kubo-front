@@ -52,13 +52,7 @@ export class DashboardComponent implements OnInit {
     },
   ]
 
-  productsAddedArr = [{
-    category: '',
-    image : "",
-    name : '',
-    price : '',
-    description : ''
-  }];
+  productsAddedArr:any = [];
 
   constructor() { }
 
