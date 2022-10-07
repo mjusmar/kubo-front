@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { GlobalService } from 'src/app/global.service';
+import { GlobalService } from 'src/app/services/global.service';
+import { RequestService } from 'src/app/services/request.service';
 import Swal from 'sweetalert2'; 
 @Component({
   selector: 'app-dialog-shopping-cart',
@@ -15,7 +16,8 @@ export class DialogShoppingCartComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogShoppingCartComponent>,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private requestService:RequestService
   ) { }
 
   ngOnInit(): void {
@@ -66,14 +68,34 @@ export class DialogShoppingCartComponent implements OnInit {
       confirmButtonText: 'Aceptar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.globalService.globalProducts = [];
-        this.dialogRef.close();
-        Swal.fire({
-          icon: 'success',
-          text:'¡Tu compra ha sido realizada!',
-        })
+        this.saveRequest()
       }
     })
+  }
+
+  saveRequest(){
+    const productsId =  this.globalService.globalProducts.map((item:any) =>{
+      return {
+        id: item.id,
+      }
+    })
+
+    const reqData = {
+      prodId: productsId,
+      totalPrice: this.totalPrice,
+    }
+
+    this.requestService.saveProductBuy(reqData).subscribe( (res) => {
+
+      this.globalService.globalProducts = [];
+      this.dialogRef.close();
+      
+      Swal.fire({
+        icon: 'success',
+        text:'¡Tu compra ha sido realizada!',
+      })
+
+    });
   }
 
 }

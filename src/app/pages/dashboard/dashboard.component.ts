@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { GlobalService } from 'src/app/global.service';
+import { GlobalService } from 'src/app/services/global.service';
+import { RequestService } from 'src/app/services/request.service';
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dashboard',
@@ -115,13 +116,18 @@ export class DashboardComponent implements OnInit {
   inputValue:any = 'filter';
 
   constructor(
-    private globalService: GlobalService
-    
+    private globalService: GlobalService,
+    private requestService: RequestService
   ) { }
 
   ngOnInit(): void {
     this.productsArrayAll = this.inputTest;
     this.productsArrayFiltered = this.inputTest;
+    this.requestService.getAllProducts().subscribe(
+      (res)=>{
+        console.log(res);
+      }
+    )
   }
 
   filterCategory(){

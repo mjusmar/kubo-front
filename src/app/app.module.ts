@@ -11,6 +11,7 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS} from '@angula
 import { DialogShoppingCartComponent } from './components/dialog-shopping-cart/dialog-shopping-cart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     BrowserAnimationsModule,
     FormsModule,
+    HttpClientModule
     // BrowserAnimationsModule
   ],
   exports:[

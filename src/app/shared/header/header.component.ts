@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogShoppingCartComponent } from 'src/app/components/dialog-shopping-cart/dialog-shopping-cart.component';
-import { GlobalService } from 'src/app/global.service';
+import { GlobalService } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-header',
