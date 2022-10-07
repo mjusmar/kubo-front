@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
 
-  private _globalProducts:any;
+  private _globalProducts:Array<any> = [];
 
   set globalProducts(products:any) {
     this._globalProducts = products;

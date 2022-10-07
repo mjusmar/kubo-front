@@ -28,6 +28,9 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     // BrowserAnimationsModule
   ],
+  exports:[
+    MatDialogModule,
+  ],
   providers: [
     {
       provide: MatDialogRef,

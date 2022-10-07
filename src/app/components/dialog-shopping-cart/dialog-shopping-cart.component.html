@@ -17,10 +17,12 @@
                                 <span>{{product.name}}</span>
                                 </div>
                                 <span style="color: blue;">${{product.price}}</span>
-                                <div style="width:30%; height: 10%; opacity: 60%;">
+                                <div class="cls-prd-options">
                                     <app-incrementer
-                                    [currentQty]="product.qty"
-                                    (incrementEvent)="changeQty($event, product)"></app-incrementer>
+                                        [currentQty]="product.qty"
+                                        (incrementEvent)="changeQty($event, product)">
+                                    </app-incrementer>
+                                    <mat-icon (click)="deleteProduct(product)">delete</mat-icon>
                                 </div>
                             </div>
                         </div>
@@ -33,7 +35,9 @@
             Precio total: ${{totalPrice}}
         </div>
         <div class="cls-save" >
-            <button class="btn btn-primary cls-button">
+            <button class="btn btn-primary cls-button"
+                    [disabled]="cartProducts.length === 0"
+                    (click)="buyProduct()">
                 Comprar
             </button>
         </div>

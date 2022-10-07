@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { GlobalService } from 'src/app/global.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit {
 
   inputTest = [
     {
+      id: 'PRD_1',
       category: 'technology',
       image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img1.webp",
       name : 'iPhone X',
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
       description : 'Excelente celular1'
     },
     {
+      id: 'PRD_2',
       category: 'technology',
       image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img3.webp",
       name : 'iPhone X',
@@ -24,6 +26,7 @@ export class DashboardComponent implements OnInit {
       description : 'Excelente celular3'
     },
     {
+      id: 'PRD_3',
       category: 'technology',
       image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img1.webp",
       name : 'iPhone X',
@@ -31,6 +34,7 @@ export class DashboardComponent implements OnInit {
       description : 'Excelente celular4'
     },
     {
+      id: 'PRD_4',
       category: 'technology',
       image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img2.webp",
       name : 'iPhone X',
@@ -38,6 +42,7 @@ export class DashboardComponent implements OnInit {
       description : 'Excelente celular5'
     },
     {
+      id: 'PRD_5',
       category: 'technology',
       image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img3.webp",
       name : 'iPhone X',
@@ -45,6 +50,7 @@ export class DashboardComponent implements OnInit {
       description : 'Excelente celular6'
     },
     {
+      id: 'PRD_6',
       category: 'food',
       image : "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       name : 'Fresa',
@@ -52,6 +58,7 @@ export class DashboardComponent implements OnInit {
       description : 'El mango es el nombre de las frutas de varias especies de árboles del género Mangifera, especialmente de Mangifera indica, y sus numerosos cultivare'
     },
     {
+      id: 'PRD_7',
       category: 'food',
       image : "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       name : 'Piña',
@@ -59,6 +66,7 @@ export class DashboardComponent implements OnInit {
       description : 'El mango es el nombre de las frutas de varias especies de árboles del género Mangifera, especialmente de Mangifera indica, y sus numerosos cultivare'
     },
     {
+      id: 'PRD_8',
       category: 'food',
       image : "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       name : 'Mango',
@@ -66,6 +74,7 @@ export class DashboardComponent implements OnInit {
       description : 'El mango es el nombre de las frutas de varias especies de árboles del género Mangifera, especialmente de Mangifera indica, y sus numerosos cultivare'
     },
     {
+      id: 'PRD_9',
       category: 'home',
       image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img3.webp",
       name : 'Escritorio',
@@ -73,6 +82,7 @@ export class DashboardComponent implements OnInit {
       description : 'Excelente celular6'
     },
     {
+      id: 'PRD_10',
       category: 'home',
       image : "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       name : 'Cama',
@@ -80,6 +90,7 @@ export class DashboardComponent implements OnInit {
       description : 'El mango es el nombre de las frutas de varias especies de árboles del género Mangifera, especialmente de Mangifera indica, y sus numerosos cultivare'
     },
     {
+      id: 'PRD_11',
       category: 'home',
       image : "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       name : 'Televisor',
@@ -87,6 +98,7 @@ export class DashboardComponent implements OnInit {
       description : 'El mango es el nombre de las frutas de varias especies de árboles del género Mangifera, especialmente de Mangifera indica, y sus numerosos cultivare'
     },
     {
+      id: 'PRD_12',
       category: 'home',
       image : "https://images.unsplash.com/photo-1553279768-865429fa0078?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
       name : 'Mesa',
@@ -100,12 +112,11 @@ export class DashboardComponent implements OnInit {
   productsArrayAll:any = [];
   productsArrayFiltered:any = [];
 
-  productsAddedArr:any = [];
-
   inputValue:any = 'filter';
 
   constructor(
     private globalService: GlobalService
+    
   ) { }
 
   ngOnInit(): void {
@@ -124,12 +135,25 @@ export class DashboardComponent implements OnInit {
   }
 
   addProduct(event:any){
-    let product = {
-      ...event,
-      qty: 1
+
+    if(!this.globalService.globalProducts.some((item:any )=>  { return item.id === event.id   }))
+    {
+      let product = {
+        ...event,
+        qty: 1
+      }
+      this.globalService.globalProducts.push(product);
+
     }
-    this.productsAddedArr.push(product);
-    this.globalService.globalProducts = this.productsAddedArr;
+    else{
+      Swal.fire({
+        icon: 'error',
+        text: '¡Ya agregaste este producto a tu carrito!',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+    
   }
  
 

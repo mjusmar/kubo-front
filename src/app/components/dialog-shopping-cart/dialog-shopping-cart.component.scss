@@ -43,10 +43,15 @@
                 border-radius: 5px;
                 margin-right: 10px;
             }
+
         }
     
     }
 
+}
+
+.mat-icon{
+    opacity: 80%;
 }
 
 
@@ -75,4 +80,15 @@ ul{
     display: flex;
     justify-content: center;
     margin-top: 1rem;
+}
+
+.cls-prd-options{
+    opacity: 60%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    mat-icon{
+        cursor: pointer;
+    }
 }

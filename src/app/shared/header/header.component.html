@@ -8,7 +8,7 @@
         <a class="navbar-brand" href="#"> HOME</a>
     </div>
     <div style="margin-right: 1rem; cursor: pointer; position: relative;" (click)="test()">
-        <div class="icon-noti"> 3 </div>
+        <div ng class="icon-noti"> {{globalService.globalProducts.length}} </div>
         <mat-icon > shopping_cart </mat-icon>
     </div>
 </nav>
