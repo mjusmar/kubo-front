@@ -27,8 +27,8 @@ export class DialogShoppingCartComponent implements OnInit {
     if(this.cartProducts.length !==0){
       
       this.cartProducts.forEach((element: any) => {
-        element.price = parseInt(element.price)
-        this.totalPrice += element.price * element.qty;
+        element.prd_price = parseInt(element.prd_price)
+        this.totalPrice += element.prd_price * element.qty;
       });
 
     }
@@ -47,13 +47,13 @@ export class DialogShoppingCartComponent implements OnInit {
     this.totalPrice=0;
 
     this.cartProducts.forEach((element: any) => {
-      this.totalPrice += element.price * element.qty;
+      this.totalPrice += element.prd_price * element.qty;
     });
     this.globalService.globalProducts = this.cartProducts;
   }
 
   deleteProduct(product: any){
-    this.cartProducts = this.cartProducts.filter((item: any) => item.id !== product.id);
+    this.cartProducts = this.cartProducts.filter((item: any) => item.prd_id !== product.prd_id);
     this.sumPrice();
   }
 
@@ -76,26 +76,45 @@ export class DialogShoppingCartComponent implements OnInit {
   saveRequest(){
     const productsId =  this.globalService.globalProducts.map((item:any) =>{
       return {
-        id: item.id,
+        prd_id: item.prd_id,
       }
     })
 
     const reqData = {
-      prodId: productsId,
-      totalPrice: this.totalPrice,
+      prodArray: productsId,
+      ord_total: this.totalPrice.toString(),
     }
 
-    this.requestService.saveProductBuy(reqData).subscribe( (res) => {
+    this.requestService.saveProductBuy(reqData)
+    .subscribe((res) => {
 
-      this.globalService.globalProducts = [];
-      this.dialogRef.close();
-      
-      Swal.fire({
-        icon: 'success',
-        text:'¡Tu compra ha sido realizada!',
-      })
+      if(res.status === "success"){
 
+        this.globalService.globalProducts = [];
+        this.dialogRef.close();
+
+        Swal.fire({
+          icon: 'success',
+          text:'¡Tu compra ha sido realizada!',
+        })
+      }
+      else{
+        this.errorMessage('¡Ocurrio un error para realizar tu compra!');
+      }
+    },
+    (error) => {
+      this.errorMessage('¡Ocurrio un error para realizar tu compra!');
     });
   }
 
+  errorMessage(message: string){
+    Swal.fire({
+      icon: 'error',
+      text: message,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
 }
+

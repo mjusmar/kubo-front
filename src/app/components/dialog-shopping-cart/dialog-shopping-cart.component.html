@@ -13,10 +13,10 @@
                             <div class="list-item" >
                                 <div >
                                 <img class="cls-icon-image"
-                                    [src]="product.image">
-                                <span>{{product.name}}</span>
+                                    [src]="product.prd_img">
+                                <span>{{product.prd_name}}</span>
                                 </div>
-                                <span style="color: blue;">${{product.price}}</span>
+                                <span style="color: blue;">${{product.prd_price}}</span>
                                 <div class="cls-prd-options">
                                     <app-incrementer
                                         [currentQty]="product.qty"

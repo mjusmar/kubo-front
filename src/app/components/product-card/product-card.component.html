@@ -1,16 +1,16 @@
 <div class="">
     <div class="card text-black">
-      <img [src]="productInfo.image"
+      <img [src]="productInfo.prd_img"
         class="crd-img"/>
       <div class="card-body">
         <div class="text-center mt-1">
-          <h2 class="card-title">{{productInfo.name}}</h2>
-          <h3 class="text-primary mb-1 pb-3">${{productInfo.price}}</h3>
+          <h2 class="card-title">{{productInfo.prd_name}}</h2>
+          <h3 class="text-primary mb-1 pb-3">${{productInfo.prd_price}}</h3>
         </div>
         <div class="text-center">
           <div class="d-flex flex-column mb-4">
             <div style="background-color: #eff1f2;">
-                <p type="text" class="cls-description">{{productInfo.description}}</p>
+                <p type="text" class="cls-description">{{productInfo.prd_descr}}</p>
             </div>
           </div>
         </div>

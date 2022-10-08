@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
   
     return items.filter(item => {
       return Object.keys(item).some(key => {
-        if (key !== 'image'){
+        if (key !== 'prd_img'){
             return String(item[key]).toLowerCase().includes(searchText.toLowerCase());
         }
           return
