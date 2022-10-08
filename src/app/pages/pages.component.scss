@@ -1,0 +1,22 @@
+.cls-header{
+    width:100%;
+    position: fixed; 
+    z-index:9;
+}
+
+.cls-pages-container{
+    display:flex; 
+    flex-flow: column;
+}
+
+.cls-dashboard{
+    display: flex;
+    position: relative;
+    min-height: 50rem;
+}
+
+.cls-footer{
+    width:100%; display: flex;
+    position: relative;
+    bottom: 0;
+}
