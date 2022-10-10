@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname+'/dist/kubo-front'));
+app.use(express.static('./dist/kubo-front'));
 // app.get('/',function(req,res){
 //     res.sendFile(path.join(__dirname+'/dist/kubo-front/index.html'));
 // });
