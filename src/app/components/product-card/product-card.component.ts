@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IProduct } from 'src/app/models/products-interface';
 
 @Component({
   selector: 'app-product-card',
@@ -7,30 +8,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ProductCardComponent implements OnInit {
 
-  // inputTest = {
-
-  //   image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-product-cards/img1.webp",
-  //   name : 'iPhone X',
-  //   price : '$366',
-  //   description : 'Excelente celular',
-  // }
-
-  // @Input() image: string = '';
-  // @Input() name : string = '';
-  // @Input() price: string = '';
-  // @Input() description: string = '';
-
-
-  @Input() productInfo: any;
+  @Input() productInfo: IProduct = {} as IProduct;
   @Output() addProductEvent: EventEmitter<any> = new EventEmitter;
 
   constructor() { 
-    // this.productInfo = this.inputTest;
   }
 
   ngOnInit(): void {
   }
 
+  /**
+   * Función que emite evento con información de producto a agregar al carrito de compras.
+   */
   addProduct(){
     this.addProductEvent.emit(this.productInfo);
   }

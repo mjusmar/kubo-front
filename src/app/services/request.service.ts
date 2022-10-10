@@ -12,11 +12,17 @@ export class RequestService {
   constructor(
     private readonly http:HttpClient
   ) { }
-
+  
+  /**
+   * Función que envía petición para obtener información de los productos.
+   */
   getAllProducts(): Observable <any> {    
     return this.http.get<any>(`${this.url}/products`);
   }
 
+  /**
+   * Función que envía petición para guardar información de la orden.
+   */
   saveProductBuy(data:any): Observable <any> {    
     return this.http.post<any>(`${this.url}/products`, data);
   }

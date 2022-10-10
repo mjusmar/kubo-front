@@ -1,7 +1,9 @@
 import { Component, OnInit} from '@angular/core';
+import { IProduct } from 'src/app/models/products-interface';
+
 import { GlobalService } from 'src/app/services/global.service';
 import { RequestService } from 'src/app/services/request.service';
-import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,12 +11,11 @@ import Swal from 'sweetalert2';
 })
 export class DashboardComponent implements OnInit {
 
-  searchProduct: string   = '';
+  searchProduct: string = '';
+  inputCategory: string = 'filter';
 
-  productsArrayAll:any = [];
-  productsArrayFiltered:any = [];
-
-  inputValue:any = 'filter';
+  productsArrayAll: IProduct[]      = [];
+  productsArrayFiltered: IProduct[] = [];
 
   constructor(
     private globalService: GlobalService,
@@ -22,46 +23,52 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.requestService.getAllProducts().subscribe(
+    this.getProducts();
+  }
+
+  /**
+   * Función envía la petición para obtener la información de todos los productos.
+   */
+  getProducts(): void{
+    this.requestService.getAllProducts()
+    .subscribe(
       (res)=>{
         if(res.status === "success"){
           this.productsArrayAll = res.data;
           this.productsArrayFiltered = res.data;
         }
-        
       }
     )
   }
 
-  filterCategory(){
-    this.productsArrayFiltered = this.productsArrayAll.filter((item: any) => item.prd_categ === this.inputValue);
+  /**
+   * Función que filtra los productos por categoría
+   */
+  filterCategory(): void{
+    this.productsArrayFiltered = this.productsArrayAll.filter((item: any) => item.prd_categ === this.inputCategory);
 
-    if(this.inputValue === 'filter'){
+    if(this.inputCategory === 'filter'){
       this.productsArrayFiltered  = this.productsArrayAll;
     } 
   }
 
-  addProduct(event:any){
+  /**
+   * Función añade el producto seleccionado al carrito de compras y verifica si ya se agregó.
+   * @param productInfo la información de producto a añadir
+   */
+  addProduct(productInfo: IProduct): void{
 
-    if(!this.globalService.globalProducts.some((item:any )=>  { return item.prd_id === event.prd_id   }))
+    if(!this.globalService.globalProducts.some((item:any )=>  { return item.prd_id === productInfo.prd_id   }))
     {
       let product = {
-        ...event,
-        qty: 1
+        ...productInfo,
+        prd_qty: 1
       }
       this.globalService.globalProducts.push(product);
-
     }
     else{
-      Swal.fire({
-        icon: 'error',
-        text: '¡Ya agregaste este producto a tu carrito!',
-        showConfirmButton: false,
-        timer: 1000
-      })
+      this.globalService.errorMessage('¡Ya agregaste este producto a tu carrito!');
     }
-    
   }
- 
 
 }

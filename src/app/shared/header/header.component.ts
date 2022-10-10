@@ -10,8 +10,6 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class HeaderComponent implements OnInit {
 
-  qtyProdAdded = 0;
-
   constructor(
     public _matDialog: MatDialog,
     public dialogRef: MatDialogRef<DialogShoppingCartComponent>,
@@ -22,13 +20,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(){
+  /**
+   * Función que abre el modal del carrito de compras.
+   */
+  openDialogShoppingCart(){
     this.dialogRef = this._matDialog.open(DialogShoppingCartComponent, {
       panelClass: "crud-label-dialog",
-      width: "450px",
+      width: "550px",
       height: "80vh",
-      // data: currentData,
     });
-
   }
+
 }

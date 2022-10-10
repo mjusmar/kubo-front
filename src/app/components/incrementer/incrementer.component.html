@@ -1,20 +1,41 @@
 
-    <div class="input-group mb-3" style="height: 15px; gap: 5px;">
-        <div class="input-group-prepend">
-          <button class="btn-outline-secondary" type="button" id="button-addon1" style="border-radius: 50%;" (click)="changeValueQty(-1)">
-            -
+    <div class="input-group cls-inc-container">
+        <button  
+            style=" display: flex;
+            height: fit-content;
+            border-radius: 50%;
+            padding: 0px;" 
+            (click)="changeValueQty(1)">
+            <mat-icon 
+                style="font-size: 18px;
+                height: 18px;
+                width: 18px;
+                display: flex;
+                align-items: revert;
+                padding-top: 0.6px;">
+                remove
+            </mat-icon>
         </button>
-        </div>
         <input type="number" class="" placeholder="" style="width: 40px; height: 30px;" 
                 [ngClass]="{'is-invalid': currentQty > 10 || currentQty < 0}"
                 min="0"
                 max="10"
-                (ngModelChange)="OnChangeInput($event)"
+                (ngModelChange)="onChangeInput($event)"
                 [(ngModel)]="currentQty">
 
-        <div class="input-group-append">
-            <button class="btn-outline-secondary" type="button"  style="border-radius: 50%;" (click)="changeValueQty(1)">
-                +
+            <button  
+                style=" display: flex;
+                height: fit-content;
+                border-radius: 50%;
+                padding: 0px;" (click)="changeValueQty(1)">
+                <mat-icon 
+                    style=" font-size: 18px;
+                    height: 18px;
+                    width: 18px;
+                    display: flex;
+                    align-items: revert;
+                    padding-top: 0.6px;">
+                    add
+                </mat-icon>
             </button>
-        </div>
     </div>

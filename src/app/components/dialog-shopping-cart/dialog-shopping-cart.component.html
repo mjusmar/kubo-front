@@ -11,15 +11,17 @@
                         <div class="cls-list" fxLayout="row">
 
                             <div class="list-item" >
-                                <div >
+                                <div style="width: 30%">
                                 <img class="cls-icon-image"
                                     [src]="product.prd_img">
                                 <span>{{product.prd_name}}</span>
                                 </div>
-                                <span style="color: blue;">${{product.prd_price}}</span>
+                                <div>
+                                    <span style="color: blue;">${{product.prd_price}}</span>
+                                </div>
                                 <div class="cls-prd-options">
                                     <app-incrementer
-                                        [currentQty]="product.qty"
+                                        [currentQty]="product.prd_qty"
                                         (incrementEvent)="changeQty($event, product)">
                                     </app-incrementer>
                                     <mat-icon (click)="deleteProduct(product)">delete</mat-icon>

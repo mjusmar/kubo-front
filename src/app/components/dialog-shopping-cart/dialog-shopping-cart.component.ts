@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { IProduct } from 'src/app/models/products-interface';
+
 import { GlobalService } from 'src/app/services/global.service';
 import { RequestService } from 'src/app/services/request.service';
-import Swal from 'sweetalert2'; 
+
 @Component({
   selector: 'app-dialog-shopping-cart',
   templateUrl: './dialog-shopping-cart.component.html',
@@ -10,17 +12,27 @@ import Swal from 'sweetalert2';
 })
 export class DialogShoppingCartComponent implements OnInit {
 
-  cartProducts: Array<any> = [];
-
   totalPrice: number = 0;
+  cartProducts: Array<IProduct> = [];
 
   constructor(
-    public dialogRef: MatDialogRef<DialogShoppingCartComponent>,
-    private globalService: GlobalService,
-    private requestService:RequestService
+    public dialogRef      : MatDialogRef<DialogShoppingCartComponent>,
+    private globalService : GlobalService,
+    private requestService: RequestService
   ) { }
 
   ngOnInit(): void {
+    this.initShoppingCart();
+  }
+
+  close(){
+    this.dialogRef.close();
+  }
+
+  /**
+   * Función que toma los elementos sellecionados para la compra y calcula su precio total.
+   */
+  initShoppingCart(): void{
     this.totalPrice = 0;
     this.cartProducts = this.globalService.globalProducts;
 
@@ -28,56 +40,63 @@ export class DialogShoppingCartComponent implements OnInit {
       
       this.cartProducts.forEach((element: any) => {
         element.prd_price = parseInt(element.prd_price)
-        this.totalPrice += element.prd_price * element.qty;
+        this.totalPrice += element.prd_price * element.prd_qty;
       });
-
     }
   }
 
-  close(){
-    this.dialogRef.close();
-  }
-
-  changeQty(event: number, product: any){
-    product.qty = event;
+  /**
+   * Función que incrementa o decrementa la cantidad de el producto y cambia el precio total.
+   * @param currentQty la cantidad actual del producto
+   * @param product el producto seleccionado para cambiar dicha cantidad
+   */
+  changeQty(currentQty: number, product: IProduct): void{
+    product.prd_qty = currentQty;
     this.sumPrice();
   }
 
-  sumPrice(){
-    this.totalPrice=0;
+  /**
+   * Función que calcula el valor total de los productos seleccionados.
+   */
+  sumPrice(): void{
+    this.totalPrice = 0;
 
     this.cartProducts.forEach((element: any) => {
-      this.totalPrice += element.prd_price * element.qty;
+      this.totalPrice += element.prd_price * element.prd_qty;
     });
+
     this.globalService.globalProducts = this.cartProducts;
   }
 
-  deleteProduct(product: any){
+  /**
+   * Función que elimina el producto seleccionado de carrito de compras y vuelve a calcular el precio total.
+   * @param product el producto seleccionado a elimiar
+   */
+  deleteProduct(product: IProduct): void{
     this.cartProducts = this.cartProducts.filter((item: any) => item.prd_id !== product.prd_id);
     this.sumPrice();
   }
 
-  buyProduct(){
-    Swal.fire({
-      title: '¿Estas seguro que deseas realizar la compra?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Aceptar'
-    }).then((result) => {
+  /**
+   * Función que abre una alerta para confirmar la compra del producto.
+   */
+  buyProduct(): void{
+    this.globalService.questionMessage('¿Estas seguro que deseas realizar la compra?')
+    .then((result) => 
+    {
       if (result.isConfirmed) {
-        this.saveRequest()
+        this.saveProductsOrder()
       }
     })
   }
 
-  saveRequest(){
-    const productsId =  this.globalService.globalProducts.map((item:any) =>{
-      return {
-        prd_id: item.prd_id,
-      }
+  /**
+   * Función que envía la peticion para guardar la orden, los productos seleccionados y el precio total
+   */
+  saveProductsOrder(): void{
+    const productsId =  this.globalService.globalProducts.map(
+      (item: any) =>{
+        return {  prd_id: item.prd_id }
     })
 
     const reqData = {
@@ -93,27 +112,15 @@ export class DialogShoppingCartComponent implements OnInit {
         this.globalService.globalProducts = [];
         this.dialogRef.close();
 
-        Swal.fire({
-          icon: 'success',
-          text:'¡Tu compra ha sido realizada!',
-        })
+        this.globalService.succesMesagge('¡Tu compra ha sido realizada!')
       }
       else{
-        this.errorMessage('¡Ocurrio un error para realizar tu compra!');
+        this.globalService.errorMessage('¡Ocurrio un error para realizar tu compra!');
       }
     },
     (error) => {
-      this.errorMessage('¡Ocurrio un error para realizar tu compra!');
+      this.globalService.errorMessage('¡Ocurrio un error para realizar tu compra!');
     });
-  }
-
-  errorMessage(message: string){
-    Swal.fire({
-      icon: 'error',
-      text: message,
-      showConfirmButton: false,
-      timer: 1500
-    })
   }
 
 }
