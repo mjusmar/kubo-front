@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class RequestService {
 
-  private readonly url = 'http://localhost:3000';
+  private readonly url = 'https://kubo-backend.herokuapp.com';
 
   constructor(
     private readonly http:HttpClient
