@@ -1,27 +1,45 @@
-# KuboFront
+# kubo-front
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.2.
+Frontend developed as a **technical assessment** for Kubo Company.
 
-## Development server
+Built with **Angular 14**, this app is a product catalog dashboard with search, filtering, and a shopping cart.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## ✨ Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- 🔍 Real-time product search
+- 🗂️ Category filtering
+- 🛒 Shopping cart with item counter
+- 📱 Responsive layout
 
-## Build
+## 🛠️ Tech Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Layer     | Technology         |
+| --------- | ------------------ |
+| Framework | Angular 14         |
+| Language  | TypeScript         |
+| Styling   | SCSS               |
+| HTTP      | Angular HttpClient |
 
-## Running unit tests
+## 🚀 Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Prerequisites:** Node.js 16+, Angular CLI
 
-## Running end-to-end tests
+```bash
+# Clone the repo
+git clone https://github.com/mjusmar/kubo-front.git
+cd kubo-front
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Install dependencies
+npm install
 
-## Further help
+# Run dev server
+ng serve
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+App runs at `http://localhost:4200`
+
+## 🔗 Related
+
+Backend API → [kubo-backend](https://github.com/mjusmar/kubo-backend)
